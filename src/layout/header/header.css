@@ -1,0 +1,66 @@
+.header-component {
+  width: 100%;
+  height: 64px;
+  box-shadow: 0px 2px 20px rgba(180, 188, 188, 0.2);
+  background-color: #ffffff;
+  display: flex;
+}
+
+.header-wrapper {
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  padding: 0 16px;
+}
+
+.flipboard-logo-image {
+  width: 128px;
+}
+
+.operation-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  color: #555555;
+}
+
+.newsletters-title-section {
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+}
+
+.operation-input-search {
+  appearance: none;
+  min-width: 216px;
+  background-color: #f7f7f7;
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: 4px;
+  height: 34px;
+  padding: 6px 12px;
+  margin: 0 14px;
+}
+
+@media only screen and (max-width: 992px) {
+  .newsletters-title-section {
+    display: none;
+  }
+  .header-wrapper {
+    flex-direction: column-reverse;
+  }
+  .header-component {
+    height: 92px;
+    padding: 10px 0;
+  }
+  .flipboard-logo-wrapper {
+    padding: 12px 0 0 0;
+  }
+  .operation-wrapper {
+    width: auto;
+  }
+  .operation-button-wrapper {
+    display: none;
+  }
+}
