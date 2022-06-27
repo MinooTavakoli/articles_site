@@ -1,0 +1,46 @@
+.operation-outline-button {
+  background-color: #ffffff;
+  color: #f52828;
+  border: 1px solid #f52828;
+  outline: none;
+  height: 34px;
+  min-width: 100px;
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.operation-outline-button:hover {
+  background-color: #000;
+}
+
+.operation-danger-button {
+  background-color: #f52828;
+  border: 1px solid #f52828;
+  color: #ffffff;
+  outline: none;
+  height: 34px;
+  min-width: 72px;
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.operation-danger-button:hover {
+  background-color: #d51c1c;
+}
+
+.operation-none-button {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  color: #555555;
+  outline: none;
+  height: 34px;
+  min-width: 72px;
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
