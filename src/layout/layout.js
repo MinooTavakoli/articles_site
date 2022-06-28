@@ -7,7 +7,7 @@ function Layout({ children }) {
     <React.Fragment>
       <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </React.Fragment>
   );
 }

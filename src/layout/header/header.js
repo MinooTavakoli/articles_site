@@ -22,11 +22,11 @@ function Header() {
               type="text"
               placeholder="Search Flipboard"
             />
-            <div className="operation-button-wrapper">
-              <Button label="Open in app" type="outline" />
-              <Button label="Sign up" type="danger" />
-              <Button label="Log in" type="none" />
-            </div>
+          </div>
+          <div className="operation-button-wrapper">
+            <Button label="Open in app" type="outline" />
+            <Button label="Sign up" type="danger" />
+            <Button label="Log in" type="none" />
           </div>
         </div>
       </div>

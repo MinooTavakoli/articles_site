@@ -1,12 +1,21 @@
 import React from "react";
+import Button from "../../../components/buttons/button";
 import "./title.css";
 
 function Title() {
   return (
-    <div>
-      <div>GET INFORMED</div>
-      <div>GET INSPIRED</div>
-      <div>Stories Curated For You</div>
+    <div className="title-component">
+      <div className="title-wrapper">
+        <br />
+        <br />
+        <span>GET INFORMED</span>
+        <br />
+        <span>GET INSPIRED</span>
+      </div>
+      <br />
+      <div className="description-wrapper">Stories Curated For You</div>
+      <br />
+      <Button label="Sign up" type="danger" />
     </div>
   );
 }
