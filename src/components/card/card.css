@@ -8,7 +8,7 @@
 }
 
 .card-wrapper {
-  height: 550px;
+  /* height: 600px; */
   border: 1px solid #e5e5e5;
   border-radius: 10px;
   width: 100%;
@@ -33,12 +33,13 @@
 .card-center-section {
   text-align: center;
   border-radius: 9px;
+  height: 200px;
 }
 
 .card-logo-news-center {
-  filter: grayscale(1) opacity(36%) blur(2px);
+  /* filter: grayscale(1) opacity(36%) blur(2px); */
   border-radius: 9px;
-  width: 60%;
+  width: 90%;
 }
 
 .card-publish-time {
@@ -54,6 +55,7 @@
   align-items: center;
   padding: 4px 24px 16px 24px;
   font-size: 18px;
+  height: 100px;
 }
 
 .card-footer-section-wrapper {

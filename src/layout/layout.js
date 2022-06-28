@@ -2,10 +2,10 @@ import React from "react";
 import Header from "./header/header";
 import Footer from "./footer/footer";
 
-function Layout({ children }) {
+function Layout({ children, data = [], onSubmit = () => {} }) {
   return (
     <React.Fragment>
-      <Header />
+      <Header data={data} onSubmit={onSubmit} />
       {children}
       <Footer />
     </React.Fragment>
