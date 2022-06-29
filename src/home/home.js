@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { postsData } from "./redux/actions";
@@ -9,18 +9,20 @@ import likeIcon from "../assets/icons/like.png";
 import uploadIcon from "../assets/icons/upload.png";
 import plusIcon from "../assets/icons/plus.png";
 import Button from "../components/buttons/button";
-import PaginationOutlined from "../components/pagination";
 import Loading from "../components/loading/Loading";
+import { useNavigate } from "react-router-dom";
+import Pagination from "../components/pagination/Pagination";
 import "./home.css";
-import { Link } from "react-router-dom";
-import PostItem from "./postItem/postItem";
 
 function Home({}) {
-  let [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  let PageSize = 4;
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,49 +42,74 @@ function Home({}) {
     fetchData();
   }, []);
 
-  const handleChange = (e, value) => {
-    setPage(value);
-  };
-
   const onSubmit = (resultSearch) => {
     if (resultSearch) {
-      setData([resultSearch]);
-    }
+      setData(resultSearch);
+    } 
   };
+
+  const onSubmitDetails = (result) => {
+    navigate(`postItem/${result.id}`, {
+      state: { result },
+    });
+  };
+
+  const currentTableData = useMemo(() => {
+    const firstPageIndex = (currentPage - 1) * PageSize;
+    const lastPageIndex = firstPageIndex + PageSize;
+    return data.slice(firstPageIndex, lastPageIndex);
+  }, [currentPage]);
+
+  function sortByDate(a, b) {
+    if (a.timePublish < b.timePublish) {
+      return 1;
+    }
+    if (a.timePublish > b.timePublish) {
+      return -1;
+    }
+    return 0;
+  }
+
+  const sorted = currentTableData.sort(sortByDate);
 
   return (
     <Layout data={data} onSubmit={onSubmit}>
       <Title />
       <div className="card-home-wrapper">
-        <PaginationOutlined page={page} onChange={handleChange} />
         {loading && <Loading />}
         {!loading && (
           <div className="card-home-item">
             {data.map((item, index) => (
-              <Link key={`_card${index + 1}`} to={`/postItem/${item.id}`}>
-                <Card
-                  key={`_card${index + 1}`}
-                  title={item.title}
-                  logo={item.logo}
-                  logoCenter={item.imageNews}
-                  likeIcon={likeIcon}
-                  uploadIcon={uploadIcon}
-                  plusIcon={plusIcon}
-                  likesCount={item.likesCount}
-                  publishTime={item.timePublish}
-                  description={item.description}
-                />
-                <PostItem data={data} id={item.id} />
-              </Link>
+              <Card
+                key={`_card${index + 1}`}
+                title={item.title}
+                logo={item.logo}
+                logoCenter={item.imageNews}
+                likeIcon={likeIcon}
+                uploadIcon={uploadIcon}
+                plusIcon={plusIcon}
+                likesCount={item.likesCount}
+                publishTime={item.timePublish}
+                description={item.description}
+                onClick={() => {
+                  onSubmitDetails(item);
+                }}
+              />
             ))}
+
+            <Pagination
+              className="pagination-bar"
+              currentPage={currentPage}
+              totalCount={data.length}
+              pageSize={PageSize}
+              onPageChange={(page) => setCurrentPage(page)}
+            />
           </div>
         )}
       </div>
-      <PaginationOutlined />
       <div className="home-button-wrapper">
         <Button label="Read more" type="danger" />
       </div>
-      <div className="home-pagination"></div>
     </Layout>
   );
 }

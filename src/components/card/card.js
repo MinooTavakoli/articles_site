@@ -1,9 +1,9 @@
 import React from 'react';
 import './card.css'
 
-function Card({ title = "", logo = undefined, logoCenter = undefined, publishTime = "", description = "", likeIcon = undefined, uploadIcon = undefined, plusIcon = undefined, likesCount = "" }) {
+function Card({ title = "", logo = undefined, logoCenter = undefined, publishTime = "", description = "", likeIcon = undefined, uploadIcon = undefined, plusIcon = undefined, likesCount = "", onClick=()=>{} }) {
     return (
-        <div className="card-component">
+        <div className="card-component" onClick={onClick}>
             <div className="card-wrapper">
                 <div className="card-head-section">
                     {logo && <img src={logo} alt="logo_news" className="card-logo-news" />}
