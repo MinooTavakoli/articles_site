@@ -1,0 +1,131 @@
+.data-item-page {
+  position: relative;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0px 2px 20px rgba(180, 188, 188, 0.2);
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 70px;
+  transition: 0.3s;
+}
+.data-item-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 46px 0;
+}
+
+.back-button-wrapper {
+  padding: 0 12px 52px 12px;
+  display: flex;
+}
+
+.data-item-title-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
+
+.data-item-logo {
+  width: 44px;
+  border-radius: 50%;
+}
+
+.data-item-title {
+  font-size: 15px;
+  padding: 0 16px;
+  font-weight: bold;
+}
+
+.data-item {
+  display: flex;
+  width: 100%;
+}
+
+.data-item-image-wrapper {
+  width: 46%;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 6px;
+}
+
+.data-item-image {
+  width: 80%;
+  padding: 16px 0;
+}
+
+.data-item-description {
+  width: 46%;
+  text-align: justify;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 6px;
+  font-size: 16px;
+  overflow: auto;
+  max-height: 260px;
+}
+
+.footer-details-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 24px 0;
+  font-size: 13px;
+  font-family: Fakt, AvenirNext-Medium, Segoe UI, sans-serif;
+}
+
+.footer-details-like-icon-wrapper {
+  margin: 0 24px;
+  display: flex;
+}
+
+.footer-details-like-icon {
+  width: 22px;
+  margin: 0 12px;
+}
+
+.footer-details-time-wrapper {
+  margin: 0 24px;
+  display: flex;
+}
+
+.footer-details-time {
+  margin: 0 12px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ececec;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(184, 184, 184);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(156, 156, 156);
+}
+
+.arrows::before {
+  position: relative;
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-right: 0.12em solid rgba(48, 4, 38, 0.87);
+  border-top: 0.12em solid rgba(48, 4, 38, 0.87);
+}
+
+.lefts {
+  transform: rotate(-135deg);
+}
