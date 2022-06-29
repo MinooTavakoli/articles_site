@@ -5,9 +5,9 @@ import PostItem from "./home/postItem/postItem";
 import "./App.css";
 
 export default function App() {
-  let element = useRoutes([
-    { path: "/", element: <Home /> },
-    { path: "postItem/:postId", element: <PostItem /> },
-  ]);
-  return element;
+    let element = useRoutes([
+        { path: "/", element: <Home /> },
+        { path: "postItem/:postId", element: <PostItem /> },
+    ]);
+    return element;
 }
