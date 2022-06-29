@@ -46,6 +46,12 @@
   margin: 0 14px;
 }
 
+.search-icon {
+  width: 22px;
+  margin: 0 8px 0 0px;
+  cursor: pointer;
+}
+
 .operation-button-wrapper {
   display: flex;
   align-items: center;

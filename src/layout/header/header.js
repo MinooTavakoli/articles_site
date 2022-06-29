@@ -1,12 +1,30 @@
 import React, { useState } from "react";
 import flipboard_logo from "../../assets/images/Flipboard_logo.png";
 import Button from "../../components/buttons/button";
+import searchIcon from "../../assets/icons/search.png";
 import "./header.css";
 
 function Header({ data = [], onSubmit = () => {} }) {
   const [search, setSearch] = useState("");
 
-  const resultSearch = data.find((_dataItem) => _dataItem.title === search);
+  // const resultSearch = data.find((_dataItem) => _dataItem.title === search);
+
+  //  let resultSearch = [];
+  // if (search.length === 0) {
+  //   resultSearch = data;
+  // } else {
+  //   resultSearch = data.filter((_dataItem) => {
+  //     if (_dataItem.title === search) {
+  //       return _dataItem;
+  //     }
+  //   });
+  // }
+
+  let resultSearch = data.filter((_dataItem) => {
+    if (_dataItem.title === search) {
+      return _dataItem;
+    }
+  });
 
   return (
     <div className="header-component">
@@ -35,13 +53,14 @@ function Header({ data = [], onSubmit = () => {} }) {
                 }
               }}
             />
-            <button
+            <img
+              src={searchIcon}
+              alt="search_icon"
+              className="search-icon"
               onClick={() => {
                 onSubmit(resultSearch);
               }}
-            >
-              search
-            </button>
+            />
           </div>
           <div className="operation-button-wrapper">
             <Button label="Open in app" type="outline" />
