@@ -49,12 +49,10 @@ function Home({}) {
   };
 
   const onSubmitDetails = (result) => {
-    console.log(result);
     navigate(`postItem/${result.id}`, {
       state: { result },
     });
   };
-  console.log(data);
 
   const currentTableData = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * PageSize;
