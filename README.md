@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project [Articles and News](https://github.com/MinooTavakoli/articles_site).
 
 ## Available Scripts
 
