@@ -7,7 +7,6 @@ function Title() {
     <div className="title-component">
       <div className="title-wrapper">
         <br />
-        <br />
         <span>GET INFORMED</span>
         <br />
         <span>GET INSPIRED</span>
