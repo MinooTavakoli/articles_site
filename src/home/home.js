@@ -1,28 +1,35 @@
 import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { postsData } from "./redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { postsData, addData } from "./redux/actions";
 import Card from "../components/card/card";
 import Layout from "../layout/layout";
 import Title from "./sections/title/title";
 import likeIcon from "../assets/icons/like.png";
 import uploadIcon from "../assets/icons/upload.png";
 import plusIcon from "../assets/icons/plus.png";
-import Button from "../components/buttons/button";
 import Loading from "../components/loading/Loading";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Pagination from "../components/pagination/Pagination";
+import NotFound from "../components/notFound/notFound";
 import "./home.css";
 
-function Home({}) {
+function Home({
+  searchResultPage = [],
+  setSearchResultPage = () => {},
+  search = "",
+  setSearch = () => {},
+}) {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [notFound, setNotFound] = useState(false);
 
-  let PageSize = 4;
+  let PageSize = 6;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,14 +50,18 @@ function Home({}) {
   }, []);
 
   const onSubmit = (resultSearch) => {
-    if (resultSearch) {
+    if (resultSearch.length === 0) {
+      setNotFound(true);
+    } else if (resultSearch.length > 0) {
       setData(resultSearch);
-    } 
+      setNotFound(false);
+      setSearchResultPage(resultSearch);
+    }
   };
 
   const onSubmitDetails = (result) => {
     navigate(`postItem/${result.id}`, {
-      state: { result },
+      state: { result, search },
     });
   };
 
@@ -58,7 +69,7 @@ function Home({}) {
     const firstPageIndex = (currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     return data.slice(firstPageIndex, lastPageIndex);
-  }, [currentPage]);
+  }, [currentPage, data]);
 
   function sortByDate(a, b) {
     if (a.timePublish < b.timePublish) {
@@ -73,43 +84,69 @@ function Home({}) {
   const sorted = currentTableData.sort(sortByDate);
 
   return (
-    <Layout data={data} onSubmit={onSubmit}>
+    <Layout
+      data={data}
+      onSubmit={onSubmit}
+      search={search}
+      setSearch={setSearch}
+    >
       <Title />
-      <div className="card-home-wrapper">
-        {loading && <Loading />}
-        {!loading && (
-          <div className="card-home-item">
-            {data.map((item, index) => (
-              <Card
-                key={`_card${index + 1}`}
-                title={item.title}
-                logo={item.logo}
-                logoCenter={item.imageNews}
-                likeIcon={likeIcon}
-                uploadIcon={uploadIcon}
-                plusIcon={plusIcon}
-                likesCount={item.likesCount}
-                publishTime={item.timePublish}
-                description={item.description}
-                onClick={() => {
-                  onSubmitDetails(item);
-                }}
-              />
-            ))}
-
-            <Pagination
-              className="pagination-bar"
-              currentPage={currentPage}
-              totalCount={data.length}
-              pageSize={PageSize}
-              onPageChange={(page) => setCurrentPage(page)}
-            />
-          </div>
-        )}
-      </div>
-      <div className="home-button-wrapper">
+      {notFound ? (
+        <NotFound />
+      ) : (
+        <div className="card-home-wrapper">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="card-home-item">
+              {searchResultPage.length > 0
+                ? searchResultPage.map((item, index) => (
+                    <Card
+                      key={`_card${index + 1}`}
+                      title={item.title}
+                      logo={item.logo}
+                      logoCenter={item.imageNews}
+                      likeIcon={likeIcon}
+                      uploadIcon={uploadIcon}
+                      plusIcon={plusIcon}
+                      likesCount={item.likesCount}
+                      publishTime={item.timePublish}
+                      description={item.description}
+                      onClick={() => {
+                        onSubmitDetails(item);
+                      }}
+                    />
+                  ))
+                : sorted.map((item, index) => (
+                    <Card
+                      key={`_card${index + 1}`}
+                      title={item.title}
+                      logo={item.logo}
+                      logoCenter={item.imageNews}
+                      likeIcon={likeIcon}
+                      uploadIcon={uploadIcon}
+                      plusIcon={plusIcon}
+                      likesCount={item.likesCount}
+                      publishTime={item.timePublish}
+                      description={item.description}
+                      onClick={() => {
+                        onSubmitDetails(item);
+                      }}
+                    />
+                  ))}
+            </div>
+          )}
+        </div>
+      )}
+      <Pagination
+        className="pagination-bar"
+        currentPage={currentPage}
+        totalCount={data.length}
+        pageSize={PageSize}
+        onPageChange={(page) => setCurrentPage(page)}
+      />
+      {/* <div className="home-button-wrapper">
         <Button label="Read more" type="danger" />
-      </div>
+      </div> */}
     </Layout>
   );
 }

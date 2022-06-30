@@ -1,19 +1,29 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Layout from "../../layout/layout";
 import likeIcon from "../../assets/icons/like.png";
 import Button from "../../components/buttons/button";
 import "./postItem.css";
 
-function PostItem() {
+function PostItem({
+  searchResultPage = [],
+}) {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const onBack = () => {
+    navigate("/", {
+      state: { searchResultPage, searchs: location.state.search },
+    });
+  };
 
   return (
     <Layout>
       <div className="data-item-page">
         <div className="data-item-wrapper">
           <div className="back-button-wrapper">
-            <Button label="Back" type="outline" />
+            <Button label="Back" type="outline" onClick={onBack} />
           </div>
           <div className="data-item-title-wrapper">
             <img

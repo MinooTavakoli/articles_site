@@ -1,6 +1,7 @@
 const defaultState = {
   helps: [],
   postsData: [],
+  addPostData: [],
 };
 
 export default (state = defaultState, action) => {
@@ -18,6 +19,14 @@ export default (state = defaultState, action) => {
       return Object.assign({}, state, {
         postsData: _postsData,
       });
+
+    case "ADD_POSTS_DATA":
+      let addPostData = action.value || [];
+      return Object.assign({}, state, {
+        addPostData: [...addPostData],
+      });
+
+   
   }
   return state;
 };

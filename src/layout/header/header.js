@@ -1,25 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import flipboard_logo from "../../assets/images/Flipboard_logo.png";
 import Button from "../../components/buttons/button";
 import searchIcon from "../../assets/icons/search.png";
 import "./header.css";
 
-function Header({ data = [], onSubmit = () => {} }) {
-  const [search, setSearch] = useState("");
-
-  // const resultSearch = data.find((_dataItem) => _dataItem.title === search);
-
-  //  let resultSearch = [];
-  // if (search.length === 0) {
-  //   resultSearch = data;
-  // } else {
-  //   resultSearch = data.filter((_dataItem) => {
-  //     if (_dataItem.title === search) {
-  //       return _dataItem;
-  //     }
-  //   });
-  // }
-
+function Header({
+  data = [],
+  onSubmit = () => {},
+  search = "",
+  setSearch = () => {},
+}) {
   let resultSearch = data.filter((_dataItem) => {
     if (_dataItem.title === search) {
       return _dataItem;
@@ -49,7 +39,7 @@ function Header({ data = [], onSubmit = () => {} }) {
               placeholder="Search Flipboard"
               onKeyDown={(e) => {
                 if (e.keyCode === 13) {
-                  onSubmit(resultSearch);
+                  search.length !== 0 ? onSubmit(resultSearch) : onSubmit(data);
                 }
               }}
             />
@@ -58,7 +48,7 @@ function Header({ data = [], onSubmit = () => {} }) {
               alt="search_icon"
               className="search-icon"
               onClick={() => {
-                onSubmit(resultSearch);
+                search.length !== 0 ? onSubmit(resultSearch) : onSubmit(data);
               }}
             />
           </div>

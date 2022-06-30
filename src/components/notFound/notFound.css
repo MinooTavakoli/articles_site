@@ -1,0 +1,18 @@
+.not-found-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 36px 0;
+}
+
+.not-found-image {
+    width: 30%;
+}
+
+.not-found-text{
+    font-size: 26px;
+    color: #9c9c9c;
+    padding: 16px 0;
+}
